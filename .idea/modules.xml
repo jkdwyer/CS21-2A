@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CS21-2A.iml" filepath="$PROJECT_DIR$/CS21-2A.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MinHeap/MinHeap.iml" filepath="$PROJECT_DIR$/MinHeap/MinHeap.iml" />
+    </modules>
+  </component>
+</project>
