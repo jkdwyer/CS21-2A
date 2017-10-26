@@ -12,6 +12,14 @@ import java.util.ArrayList;
  */
 public class MakeMinHeap {
     public static void main(String args[]) {
+        // instantiate and print a PQ object.
+        PQ pq1 = new PQ();
+        pq1.setDefaultArrayList();
+        pq1.printNodeArray();
+        // System.out.println("pq1.getArrSize(): " + pq1.getArrSize());
+        pq1.buildHeap();
+        pq1.printNodeArray();
+
         /*
         MinHeap mH2 = new MinHeap();
         mH2.setDefaultArrayList();
@@ -34,7 +42,7 @@ public class MakeMinHeap {
         }
         MinHelper.printSortedArray(mH3.getSortedArr().toString());
         */
-
+    /*
         // 0 - Create initial array.
         int top;
         MinHeap mH1 = new MinHeap();
@@ -85,5 +93,6 @@ public class MakeMinHeap {
         }
         // 10 - print the data again.
         MinHelper.printSortedArray(mH1.getSortedArr().toString());
+    */
     }
 }
