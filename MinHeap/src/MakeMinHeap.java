@@ -13,36 +13,30 @@ import java.util.ArrayList;
 public class MakeMinHeap {
     public static void main(String args[]) {
         // instantiate and print a PQ object.
+        System.out.println("\nPriority Queue\n");
         PQ pq1 = new PQ();
         pq1.setDefaultArrayList();
+        System.out.println("pq1 initial ArrayList:");
         pq1.printNodeArray();
-        // System.out.println("pq1.getArrSize(): " + pq1.getArrSize());
+        // test sift.
+        // pq1.sift(5);
+        // pq1.printNodeArray();
+
         pq1.buildHeap();
+        System.out.println("pq1 after buildHeap():");
         pq1.printNodeArray();
-
-        /*
-        MinHeap mH2 = new MinHeap();
-        mH2.setDefaultArrayList();
-        mH2.heapify(4);
-        MinHelper.printHeapArray(mH2.getHeapArr().toString());
         try {
-            mH2.heapInsert(7);
-        } catch (Exception e) {
-            e.getMessage();
-        }
-        MinHelper.printHeapArray(mH2.getHeapArr().toString());
-
-        MinHeap mH3 = new MinHeap();
-        mH3.setDefaultArrayList();
-        mH3.buildHeap();
-        try {
-            mH3.heapSort();
+            pq1.heapSort();
+        } catch (IndexOutOfBoundsException ioobe) {
+            ioobe.printStackTrace();
+            System.out.println(ioobe.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        MinHelper.printSortedArray(mH3.getSortedArr().toString());
-        */
-    /*
+        System.out.println("pq1 after heapSort():");
+        pq1.printSortedNodeArray();
+
+        System.out.println("\nMinimum Heap\n");
         // 0 - Create initial array.
         int top;
         MinHeap mH1 = new MinHeap();
@@ -50,14 +44,16 @@ public class MakeMinHeap {
 
         // 0 - a - Print initial ArrayList (for me.)
         MinHelper.printHeapArray(mH1.getHeapArr().toString());
+        System.out.println("Serialize\n");
         // 0 - b - Serialize and deserialize the initial ArrayList.
         ArrayList<Integer> serArray = MinHelper.serializeArrayList();
         // 0 - c - Print the serArray (for me.)
         System.out.println("serArray: " + serArray);
 
         // 1 - Create the Integer Priority Queue from the initial ArrayList.
-        // 1 - a - Print the PQ (for me.)
+        // 1 - a - Print the PQ (see the top section of output above.)
 
+        System.out.println("\nAssignment 2 Output:");
         // 2 - Print your name.
         System.out.println(mH1.getMessage());
         mH1.buildHeap();
@@ -93,6 +89,6 @@ public class MakeMinHeap {
         }
         // 10 - print the data again.
         MinHelper.printSortedArray(mH1.getSortedArr().toString());
-    */
+
     }
 }

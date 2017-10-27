@@ -4,6 +4,8 @@ public class PQ extends AbstractHeap {
     private String message = "in PQ subclass";
     protected ArrayList<Node> heapArr = new ArrayList<Node>();
     protected ArrayList<Node> sortedArr = new ArrayList<Node>();
+    int sortedArrSize = 0;
+    int sortedArrMaxPos = 0;
 
     /**
      * setDefaultArrayList() method
@@ -12,16 +14,16 @@ public class PQ extends AbstractHeap {
      * - (Not sure if I actually need the key field or not.)
      */
     public void setDefaultArrayList() {
-        Node n0 = new Node(1, 5, 0);
-        Node n1 = new Node(2, 3, 1);
-        Node n2 = new Node(3, 7, 2);
-        Node n3 = new Node(4, 1, 3);
-        Node n4 = new Node(5, 2, 4);
-        Node n5 = new Node(1, 4, 5);
-        Node n6 = new Node(2, 9, 6);
-        Node n7 = new Node(3, 8, 7);
-        Node n8 = new Node(1, 6, 8);
-        Node n9 = new Node(2, 10, 9);
+        Node n0 = new Node(1, 5);
+        Node n1 = new Node(2, 3);
+        Node n2 = new Node(3, 7);
+        Node n3 = new Node(4, 1);
+        Node n4 = new Node(5, 2);
+        Node n5 = new Node(1, 4);
+        Node n6 = new Node(2, 9);
+        Node n7 = new Node(3, 8);
+        Node n8 = new Node(1, 6);
+        Node n9 = new Node(2, 10);
         heapArr.add(n0);
         heapArr.add(n1);
         heapArr.add(n2);
@@ -34,7 +36,6 @@ public class PQ extends AbstractHeap {
         heapArr.add(n9);
         arrSize = heapArr.size();
         arrMaxPos = (arrSize-1);
-        message = "\nName:  Jan Dwyer\n";
     }
 
     public String getMessage() {
@@ -45,8 +46,32 @@ public class PQ extends AbstractHeap {
         message = msg;
     }
 
+    public int getSortedArrSize() {
+        return sortedArrSize;
+    }
+
+    public int getSortedArrMaxPos() {
+        return sortedArrMaxPos;
+    }
+
+    public ArrayList<Node> getHeapNodeArr() {
+        return heapArr;
+    }
+
+    public ArrayList<Node> getSortedNodeArr() {
+        return sortedArr;
+    }
+
+    public Node getNodeAtPos(int index) {
+        return heapArr.get(index);
+    }
+
+    public Node getSortedNodeAtPos(int index) {
+        return sortedArr.get(index);
+    }
+
     /**
-     * sift() method
+     * siftNode() method
      * - does a partial, recursive sort from any position in the ArrayList.
      * - for MinHeap, no child may have a lower value than its parent.
      * - Forgot to remove method body from abstract class version, but
@@ -55,8 +80,8 @@ public class PQ extends AbstractHeap {
      */
     public void sift(int endPos) {
         // TODO:  remove this output.
-        System.out.println("sift - endPos: " + endPos);
-        printNodeArray();
+        // System.out.println("sift - endPos: " + endPos);
+        // printNodeArray();
 
         int childPos = endPos;
         while (childPos > stopPosition) {
@@ -72,7 +97,7 @@ public class PQ extends AbstractHeap {
                 changeKey(parentPos, childPos);
                 childPos = parentPos;
                 // TODO:  remove this output.
-                System.out.println("recursive call (pri)");
+                // System.out.println("recursive call (pri)");
                 // recursive call.
                 sift(childPos);
             } else if (childPri == parentPri) {
@@ -80,7 +105,7 @@ public class PQ extends AbstractHeap {
                     changeKey(parentPos, childPos);
                     childPos = parentPos;
                     // TODO:  remove this output.
-                    System.out.println("recursive call (val)");
+                    // System.out.println("recursive call (val)");
                     // recursive call.
                     sift(childPos);
                 } else {
@@ -93,7 +118,6 @@ public class PQ extends AbstractHeap {
             }
         }
     }
-
 
     /**
      * changeKey() method
@@ -109,14 +133,69 @@ public class PQ extends AbstractHeap {
         heapArr.set(childPos2, parentNode);
     }
 
+    /**
+     * extractTopNode() method
+     * - Needs to use an ArrayList<Node> for PQ.
+     * - Local method overwrite of inherited vsn only works
+     *      with same signature, so this needs a new name.
+     * @return
+     * @throws Exception
+     */
+    public Node extractTopNode() throws Exception {
+        if (isHeap) {
+            Node top = heapArr.get(0);
+            heapArr.remove(0);
+            // reset size and max position, then re-build the heap.
+            arrSize = heapArr.size();
+            arrMaxPos = (arrSize-1);
+            buildHeap();
+            return top;
+        } else {
+            throw new Exception("Error: extractTopNode() can only be used on a completed heap.");
+        }
+    }
+
+    /**
+     * heapSort() method
+     * - For PQ objects this method must call extractTopNode.
+     *
+     * @throws Exception
+     */
+    public void heapSort() throws Exception {
+        if (isHeap) {
+            int maxPos = arrMaxPos;
+            for (int i = 0; i <= maxPos; i++) {
+                Node topVal = extractTopNode();
+                sortedArr.add(i, topVal);
+                sortedArrSize = sortedArr.size();
+                sortedArrMaxPos = (sortedArrSize-1);
+            }
+            isSorted = true;
+        } else {
+            throw new Exception("Error: heapSort() can only be used on a completed heap.");
+        }
+    }
+
 
     public void printNodeArray() {
-        System.out.println("nX: K V P (Nodes in PQ object heapArr: Key - Value - Priority)");
-        for (int i = 0; i <= 9; i++) {
+        System.out.println("nX: K V P (Nodes in PQ object heapNodeArr: Key - Value - Priority)");
+        for (int i = 0; i <= arrMaxPos; i++) {
             Node iNode = heapArr.get(i);
             int iNodeVal = iNode.getPayload();
             int iNodePri = iNode.getPriority();
-            System.out.println("n" + i + ": " + i + " " + iNodeVal + " " + iNodePri);
+            System.out.print("n" + i + ": " + i + " " + iNodeVal + " " + iNodePri + "   ");
         }
+        System.out.println();
+    }
+
+    public void printSortedNodeArray() {
+        System.out.println("nX: K V P (Nodes in PQ object sortedNodeArr: Key - Value - Priority)");
+        for (int i = 0; i <= sortedArrMaxPos; i++) {
+            Node iNode = sortedArr.get(i);
+            int iNodeVal = iNode.getPayload();
+            int iNodePri = iNode.getPriority();
+            System.out.print("n" + i + ": " + i + " " + iNodeVal + " " + iNodePri + "   ");
+        }
+        System.out.println();
     }
 }

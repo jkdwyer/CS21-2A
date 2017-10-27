@@ -207,7 +207,6 @@ public abstract class AbstractHeap {
         public int extractTop() throws Exception {
             if (isHeap) {
                 int top = heapArr.get(0);
-                ArrayList<Integer> sortedArr = new ArrayList<Integer>();
                 heapArr.remove(0);
                 // reset size and max position, then re-build the heap.
                 arrSize = heapArr.size();

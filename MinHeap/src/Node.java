@@ -9,23 +9,13 @@
 public class Node {
     private int payload;
     private int priority;
-    private int key;
 
     public Node() {
     }
 
-    public Node(int pri, int value, int pos) {
+    public Node(int pri, int value) {
         payload = value;
         priority = pri;
-        key = pos;
-    }
-
-    public void setKey(int pos) {
-        key = pos;
-    }
-
-    public int getKey() {
-        return key;
     }
 
     public int getPayload() {
