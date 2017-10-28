@@ -7,36 +7,6 @@ public class PQ extends AbstractHeap {
     int sortedArrSize = 0;
     int sortedArrMaxPos = 0;
 
-    /**
-     * setDefaultArrayList() method
-     * - Needs to instantiate ten Nodes with value, priority and position (key)
-     *      then add each Node to its proper position in the ArrayList.
-     * - (Not sure if I actually need the key field or not.)
-     */
-    public void setDefaultArrayList() {
-        Node n0 = new Node(1, 5);
-        Node n1 = new Node(2, 3);
-        Node n2 = new Node(3, 7);
-        Node n3 = new Node(4, 1);
-        Node n4 = new Node(5, 2);
-        Node n5 = new Node(1, 4);
-        Node n6 = new Node(2, 9);
-        Node n7 = new Node(3, 8);
-        Node n8 = new Node(1, 6);
-        Node n9 = new Node(2, 10);
-        heapArr.add(n0);
-        heapArr.add(n1);
-        heapArr.add(n2);
-        heapArr.add(n3);
-        heapArr.add(n4);
-        heapArr.add(n5);
-        heapArr.add(n6);
-        heapArr.add(n7);
-        heapArr.add(n8);
-        heapArr.add(n9);
-        arrSize = heapArr.size();
-        arrMaxPos = (arrSize-1);
-    }
 
     public String getMessage() {
         return message;
@@ -69,6 +39,39 @@ public class PQ extends AbstractHeap {
     public Node getSortedNodeAtPos(int index) {
         return sortedArr.get(index);
     }
+
+
+    /**
+     * setDefaultArrayList() method
+     * - Needs to instantiate ten Nodes with value, priority and position (key)
+     *      then add each Node to its proper position in the ArrayList.
+     * - (Not sure if I actually need the key field or not.)
+     */
+    public void setDefaultArrayList() {
+        Node n0 = new Node(1, 5);
+        Node n1 = new Node(2, 3);
+        Node n2 = new Node(3, 7);
+        Node n3 = new Node(4, 1);
+        Node n4 = new Node(5, 2);
+        Node n5 = new Node(1, 4);
+        Node n6 = new Node(2, 9);
+        Node n7 = new Node(3, 8);
+        Node n8 = new Node(1, 6);
+        Node n9 = new Node(2, 10);
+        heapArr.add(n0);
+        heapArr.add(n1);
+        heapArr.add(n2);
+        heapArr.add(n3);
+        heapArr.add(n4);
+        heapArr.add(n5);
+        heapArr.add(n6);
+        heapArr.add(n7);
+        heapArr.add(n8);
+        heapArr.add(n9);
+        arrSize = heapArr.size();
+        arrMaxPos = (arrSize-1);
+    }
+
 
     /**
      * siftNode() method
@@ -119,6 +122,7 @@ public class PQ extends AbstractHeap {
         }
     }
 
+
     /**
      * changeKey() method
      * - This is equivalent to swap() but must call Node.setKey()
@@ -132,6 +136,7 @@ public class PQ extends AbstractHeap {
         heapArr.set(parentPos1, childNode);
         heapArr.set(childPos2, parentNode);
     }
+
 
     /**
      * extractTopNode() method
@@ -155,10 +160,10 @@ public class PQ extends AbstractHeap {
         }
     }
 
+
     /**
      * heapSort() method
      * - For PQ objects this method must call extractTopNode.
-     *
      * @throws Exception
      */
     public void heapSort() throws Exception {
@@ -173,6 +178,24 @@ public class PQ extends AbstractHeap {
             isSorted = true;
         } else {
             throw new Exception("Error: heapSort() can only be used on a completed heap.");
+        }
+    }
+
+
+    /**
+     * heapAddNewNode() method
+     * - change in signature requires a change in name.
+     * @param newNode
+     * @throws Exception
+     */
+    public void heapAddNewNode(Node newNode) throws Exception {
+        if (isHeap) {
+            heapArr.add(newNode);
+            arrSize = heapArr.size();
+            arrMaxPos = (arrSize-1);
+            buildHeap();
+        } else {
+            throw new Exception("Error: heapAddNewNode() can only be used on a completed heap.");
         }
     }
 

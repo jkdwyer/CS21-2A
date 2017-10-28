@@ -203,4 +203,48 @@ public class PQTest {
         assertEquals(n4, node);
     }
 
+    @Test
+    public void heapAddNewNode() throws Exception {
+        PQ pqObject = new PQ();
+        pqObject.setDefaultArrayList();
+        Node n0 = pqObject.getNodeAtPos(0);
+        Node n1 = pqObject.getNodeAtPos(1);
+        Node n2 = pqObject.getNodeAtPos(2);
+        Node n3 = pqObject.getNodeAtPos(3);
+        Node n4 = pqObject.getNodeAtPos(4);
+        Node n5 = pqObject.getNodeAtPos(5);
+        Node n6 = pqObject.getNodeAtPos(6);
+        Node n7 = pqObject.getNodeAtPos(7);
+        Node n8 = pqObject.getNodeAtPos(8);
+        Node n9 = pqObject.getNodeAtPos(9);
+        Node n10 = new Node(2, 1);
+        // TODO:  remove this output.
+        pqObject.printNodeArray();
+        pqObject.buildHeap();
+        pqObject.heapAddNewNode(n10);
+        Node node;
+        node = pqObject.getNodeAtPos(0);
+        assertEquals(n5, node);
+        node = pqObject.getNodeAtPos(1);
+        assertEquals(n8, node);
+        node = pqObject.getNodeAtPos(2);
+        assertEquals(n0, node);
+        node = pqObject.getNodeAtPos(3);
+        assertEquals(n1, node);
+        node = pqObject.getNodeAtPos(4);
+        assertEquals(n10, node);
+        node = pqObject.getNodeAtPos(5);
+        assertEquals(n2, node);
+        node = pqObject.getNodeAtPos(6);
+        assertEquals(n6, node);
+        node = pqObject.getNodeAtPos(7);
+        assertEquals(n3, node);
+        node = pqObject.getNodeAtPos(8);
+        assertEquals(n7, node);
+        node = pqObject.getNodeAtPos(9);
+        assertEquals(n4, node);
+        node = pqObject.getNodeAtPos(10);
+        assertEquals(n9, node);
+    }
+
 }

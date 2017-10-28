@@ -25,6 +25,17 @@ public class MakeMinHeap {
         pq1.buildHeap();
         System.out.println("pq1 after buildHeap():");
         pq1.printNodeArray();
+
+        // test heapAddNewNode()
+        Node n10 = new Node(2, 1);
+        try {
+            pq1.heapAddNewNode(n10);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        pq1.printNodeArray();
+        System.out.println("pq1 after heapAddNewNode():");
+/*
         try {
             pq1.heapSort();
         } catch (IndexOutOfBoundsException ioobe) {
@@ -89,6 +100,6 @@ public class MakeMinHeap {
         }
         // 10 - print the data again.
         MinHelper.printSortedArray(mH1.getSortedArr().toString());
-
+*/
     }
 }
